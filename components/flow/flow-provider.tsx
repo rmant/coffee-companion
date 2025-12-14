@@ -72,6 +72,7 @@ type FlowAction =
   | { type: "SET_DATA"; coffees: Coffee[]; brewers: Brewer[] }
   | { type: "SET_PHASE"; phase: FlowPhase }
   | { type: "SELECT_COFFEE"; coffeeId: string }
+  | { type: "ADD_COFFEE"; coffee: Coffee }
   | { type: "SELECT_BREWER"; brewerId: string }
   | { type: "UPDATE_SETTINGS"; settings: Partial<Pick<FlowState, "doseG" | "waterG" | "grindSetting" | "waterTempC" | "bloomWaterG" | "bloomTimeS" | "pourCount">> }
   | { type: "START_TIMER" }
@@ -143,6 +144,13 @@ function flowReducer(state: FlowState, action: FlowAction): FlowState {
       return {
         ...state,
         coffeeId: action.coffeeId,
+      };
+
+    case "ADD_COFFEE":
+      return {
+        ...state,
+        coffees: [action.coffee, ...state.coffees],
+        coffeeId: action.coffee.id,
       };
 
     case "SELECT_BREWER": {
@@ -248,6 +256,7 @@ interface FlowContextValue {
   prevPhase: () => void;
   goToPhase: (phase: FlowPhase) => void;
   selectCoffee: (id: string) => void;
+  addCoffee: (coffee: Coffee) => void;
   selectBrewer: (id: string) => void;
   updateSettings: (settings: Partial<Pick<FlowState, "doseG" | "waterG" | "grindSetting" | "waterTempC" | "bloomWaterG" | "bloomTimeS" | "pourCount">>) => void;
   startTimer: () => void;
@@ -315,6 +324,10 @@ export function FlowProvider({ children, coffees, brewers }: FlowProviderProps) 
     dispatch({ type: "SELECT_COFFEE", coffeeId: id });
   }, []);
 
+  const addCoffee = useCallback((coffee: Coffee) => {
+    dispatch({ type: "ADD_COFFEE", coffee });
+  }, []);
+
   const selectBrewer = useCallback((id: string) => {
     dispatch({ type: "SELECT_BREWER", brewerId: id });
   }, []);
@@ -349,6 +362,7 @@ export function FlowProvider({ children, coffees, brewers }: FlowProviderProps) 
     prevPhase,
     goToPhase,
     selectCoffee,
+    addCoffee,
     selectBrewer,
     updateSettings,
     startTimer,
