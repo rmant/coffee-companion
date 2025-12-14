@@ -92,7 +92,7 @@ const initialState: FlowState = {
   brewers: [],
   coffeeId: null,
   brewerId: null,
-  doseG: 15,
+  doseG: 15.5,
   waterG: 250,
   grindSetting: null,
   waterTempC: 93,
