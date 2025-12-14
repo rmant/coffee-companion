@@ -154,12 +154,9 @@ function flowReducer(state: FlowState, action: FlowAction): FlowState {
       };
 
     case "SELECT_BREWER": {
-      const brewer = state.brewers.find((b) => b.id === action.brewerId);
       return {
         ...state,
         brewerId: action.brewerId,
-        // Apply brewer defaults if available
-        doseG: brewer?.default_dose_g ?? state.doseG,
       };
     }
 
