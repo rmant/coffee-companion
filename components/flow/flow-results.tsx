@@ -317,7 +317,7 @@ export function FlowResults() {
         )}
 
         {/* Navigation */}
-        <div className="flex gap-4 pt-4 flow-enter" style={{ animationDelay: "250ms" }}>
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 pt-4 flow-enter" style={{ animationDelay: "250ms" }}>
           <button
             onClick={prevPhase}
             className={`flow-btn-primary ${isDark ? "" : "flow-btn-dark"} opacity-60 hover:opacity-100`}
