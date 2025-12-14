@@ -5,43 +5,21 @@ import { useRouter } from "next/navigation";
 import { useFlow } from "./flow-provider";
 import { isDarkPhase } from "./flow-gradient";
 import { FlowParticles } from "./flow-particles";
-import { parseBrewTime, formatBrewTime } from "@/lib/utils/brew-calculations";
-
-// Taste metrics configuration
-const tasteMetrics = [
-  { key: "acidity", label: "Acidez", description: "Brillante / Plana" },
-  { key: "sweetness", label: "Dulzor", description: "Intenso / Sutil" },
-  { key: "body", label: "Cuerpo", description: "Denso / Ligero" },
-  { key: "balance", label: "Balance", description: "Equilibrado / Dominante" },
-  { key: "aftertaste", label: "Retrogusto", description: "Largo / Corto" },
-] as const;
-
-type MetricKey = typeof tasteMetrics[number]["key"];
+import { parseBrewTime } from "@/lib/utils/brew-calculations";
 
 export function FlowResults() {
   const router = useRouter();
-  const { state, dispatch, prevPhase } = useFlow();
+  const { state, prevPhase } = useFlow();
   const isDark = isDarkPhase(state.phase);
 
   // Local state
   const [brewTimeText, setBrewTimeText] = useState("3:00");
-  const [metrics, setMetrics] = useState<Record<MetricKey, number>>({
-    acidity: 3,
-    sweetness: 3,
-    body: 3,
-    balance: 3,
-    aftertaste: 3,
-  });
   const [overallRating, setOverallRating] = useState<number | null>(null);
   const [tastingNotes, setTastingNotes] = useState("");
   const [feedback, setFeedback] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
-
-  const handleMetricChange = (key: MetricKey, value: number) => {
-    setMetrics((prev) => ({ ...prev, [key]: value }));
-  };
 
   const handleSave = async () => {
     if (!state.coffeeId || !state.brewerId) {
@@ -55,7 +33,6 @@ export function FlowResults() {
     setError(null);
 
     try {
-      // Parse tasting notes from comma-separated string
       const notes = tastingNotes
         .split(",")
         .map((note) => note.trim())
@@ -88,7 +65,6 @@ export function FlowResults() {
       const brew = await response.json();
       setShowSuccess(true);
 
-      // Redirect after showing success
       setTimeout(() => {
         router.push(`/brews/${brew.id}`);
       }, 1500);
@@ -116,199 +92,127 @@ export function FlowResults() {
     );
   }
 
+  const textPrimary = isDark ? "text-[var(--flow-text-primary)]" : "text-[var(--flow-text-dark-primary)]";
+  const textSecondary = isDark ? "text-[var(--flow-text-secondary)]" : "text-[var(--flow-text-dark-secondary)]";
+  const textMuted = isDark ? "text-[var(--flow-text-muted)]" : "text-[var(--flow-text-dark-muted)]";
+
   return (
-    <div className="flow-content min-h-screen pt-28 pb-12 overflow-y-auto" style={{ justifyContent: "flex-start" }}>
+    <div className="flow-content min-h-screen pt-24 pb-12 overflow-y-auto" style={{ justifyContent: "flex-start" }}>
       {/* Header */}
-      <div className="mb-8 flow-enter">
-        <h2
-          className={`flow-display flow-text-title mb-2 ${
-            isDark ? "text-[var(--flow-text-primary)]" : "text-[var(--flow-text-dark-primary)]"
-          }`}
-        >
+      <div className="mb-10 flow-enter">
+        <h2 className={`flow-display flow-text-title mb-2 ${textPrimary}`}>
           Resultados
         </h2>
-        <p
-          className={`flow-display-light flow-text-body ${
-            isDark ? "text-[var(--flow-text-secondary)]" : "text-[var(--flow-text-dark-secondary)]"
-          }`}
-        >
+        <p className={`flow-display-light flow-text-body ${textSecondary}`}>
           ¿Cómo quedó tu preparación?
         </p>
       </div>
 
-      <div className="w-full max-w-md space-y-8">
-        {/* Brew time */}
-        <div className="flow-enter">
-          <label
-            className={`block text-sm mb-3 text-center ${
-              isDark ? "text-[var(--flow-text-secondary)]" : "text-[var(--flow-text-dark-secondary)]"
-            }`}
-          >
-            Tiempo Total
-          </label>
-          <div className="flex justify-center">
+      <div className="w-full max-w-sm space-y-8 px-4">
+        {/* Time & Rating Row */}
+        <div className="flex gap-6 flow-enter">
+          {/* Brew time */}
+          <div className="flex-1">
+            <label className={`block text-xs font-mono uppercase tracking-wider mb-2 ${textMuted}`}>
+              Tiempo
+            </label>
             <input
               type="text"
               value={brewTimeText}
               onChange={(e) => setBrewTimeText(e.target.value)}
               placeholder="3:00"
-              className={`flow-input text-center ${isDark ? "" : "flow-input-dark"}`}
-              style={{ maxWidth: "120px", fontSize: "1.75rem" }}
+              className={`w-full bg-[var(--charred)] border-2 border-[var(--concrete-light)] px-4 py-3 font-mono text-2xl text-center ${textPrimary} focus:border-[var(--amber)] focus:outline-none`}
             />
+            <p className={`text-[10px] text-center mt-1 ${textMuted}`}>
+              M:SS
+            </p>
           </div>
-          <p
-            className={`text-xs text-center mt-2 ${
-              isDark ? "text-[var(--flow-text-muted)]" : "text-[var(--flow-text-dark-muted)]"
-            }`}
-          >
-            Formato M:SS (ej: 3:15)
-          </p>
-        </div>
 
-        {/* Overall rating */}
-        <div className="flow-enter" style={{ animationDelay: "50ms" }}>
-          <label
-            className={`block text-sm mb-4 text-center ${
-              isDark ? "text-[var(--flow-text-secondary)]" : "text-[var(--flow-text-dark-secondary)]"
-            }`}
-          >
-            Calificación General
-          </label>
-          <div className="flex justify-center gap-2">
-            {[1, 2, 3, 4, 5].map((rating) => (
-              <button
-                key={rating}
-                onClick={() => setOverallRating(overallRating === rating ? null : rating)}
-                className="group transition-transform hover:scale-110 active:scale-95"
-              >
-                <svg
-                  width="40"
-                  height="40"
-                  viewBox="0 0 48 48"
-                  className={`transition-colors ${
+          {/* Rating */}
+          <div className="flex-1">
+            <label className={`block text-xs font-mono uppercase tracking-wider mb-2 ${textMuted}`}>
+              Rating
+            </label>
+            <div className="flex gap-1">
+              {[1, 2, 3, 4, 5].map((rating) => (
+                <button
+                  key={rating}
+                  onClick={() => setOverallRating(overallRating === rating ? null : rating)}
+                  className={`flex-1 aspect-square border-2 transition-all ${
                     overallRating !== null && rating <= overallRating
-                      ? "text-[#d4a574]"
-                      : isDark
-                      ? "text-white/20 group-hover:text-white/40"
-                      : "text-[#3c2415]/20 group-hover:text-[#3c2415]/40"
+                      ? "bg-[var(--amber)] border-[var(--amber)]"
+                      : "bg-transparent border-[var(--concrete-light)] hover:border-[var(--amber)]/50"
                   }`}
                 >
-                  <ellipse cx="24" cy="24" rx="10" ry="16" fill="currentColor" />
-                  <path
-                    d="M24 10c-1.5 3-1.5 10 0 14s1.5 10 0 14"
-                    stroke={
-                      overallRating !== null && rating <= overallRating
-                        ? "#3c2415"
-                        : isDark
-                        ? "rgba(255,255,255,0.2)"
-                        : "rgba(60,36,21,0.2)"
-                    }
-                    strokeWidth="1.5"
-                    fill="none"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Taste metrics */}
-        <div className="flow-enter space-y-4" style={{ animationDelay: "100ms" }}>
-          <label
-            className={`block text-sm mb-2 text-center ${
-              isDark ? "text-[var(--flow-text-secondary)]" : "text-[var(--flow-text-dark-secondary)]"
-            }`}
-          >
-            Perfil de Sabor
-          </label>
-
-          {tasteMetrics.map((metric) => (
-            <div key={metric.key} className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span
-                  className={`text-sm ${
-                    isDark ? "text-[var(--flow-text-primary)]" : "text-[var(--flow-text-dark-primary)]"
-                  }`}
-                >
-                  {metric.label}
-                </span>
-                <span
-                  className={`text-xs ${
-                    isDark ? "text-[var(--flow-text-muted)]" : "text-[var(--flow-text-dark-muted)]"
-                  }`}
-                >
-                  {metric.description}
-                </span>
-              </div>
-              <div className="flex gap-1.5">
-                {[1, 2, 3, 4, 5].map((value) => (
-                  <button
-                    key={value}
-                    onClick={() => handleMetricChange(metric.key, value)}
-                    className={`flex-1 h-8 rounded-full transition-all ${
-                      value <= metrics[metric.key]
-                        ? "bg-[#c45c3e]"
-                        : isDark
-                        ? "bg-white/10 hover:bg-white/20"
-                        : "bg-[#3c2415]/10 hover:bg-[#3c2415]/20"
-                    }`}
-                  />
-                ))}
-              </div>
+                  <span className={`font-mono text-sm ${
+                    overallRating !== null && rating <= overallRating
+                      ? "text-[var(--charred)]"
+                      : textMuted
+                  }`}>
+                    {rating}
+                  </span>
+                </button>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         {/* Tasting notes */}
-        <div className="flow-enter" style={{ animationDelay: "150ms" }}>
-          <label
-            className={`block text-sm mb-2 ${
-              isDark ? "text-[var(--flow-text-secondary)]" : "text-[var(--flow-text-dark-secondary)]"
-            }`}
-          >
-            Notas de Cata (opcional)
+        <div className="flow-enter" style={{ animationDelay: "50ms" }}>
+          <label className={`block text-xs font-mono uppercase tracking-wider mb-2 ${textMuted}`}>
+            Notas de Cata
           </label>
           <input
             type="text"
             value={tastingNotes}
             onChange={(e) => setTastingNotes(e.target.value)}
             placeholder="frutal, chocolate, nuez..."
-            className={`w-full bg-transparent border-2 rounded-lg px-4 py-3 transition-all ${
-              isDark
-                ? "border-white/20 text-[var(--flow-text-primary)] placeholder:text-[var(--flow-text-muted)] focus:border-white/40"
-                : "border-[#3c2415]/20 text-[var(--flow-text-dark-primary)] placeholder:text-[var(--flow-text-dark-muted)] focus:border-[#3c2415]/40"
-            }`}
+            className={`w-full bg-[var(--charred)] border-2 border-[var(--concrete-light)] px-4 py-3 ${textPrimary} placeholder:${textMuted} focus:border-[var(--amber)] focus:outline-none`}
           />
-          <p
-            className={`text-xs mt-1 ${
-              isDark ? "text-[var(--flow-text-muted)]" : "text-[var(--flow-text-dark-muted)]"
-            }`}
-          >
-            Separadas por comas
+          <p className={`text-[10px] mt-1 ${textMuted}`}>
+            Separadas por comas (opcional)
           </p>
         </div>
 
         {/* Feedback */}
-        <div className="flow-enter" style={{ animationDelay: "200ms" }}>
-          <label
-            className={`block text-sm mb-2 ${
-              isDark ? "text-[var(--flow-text-secondary)]" : "text-[var(--flow-text-dark-secondary)]"
-            }`}
-          >
-            Comentarios (opcional)
+        <div className="flow-enter" style={{ animationDelay: "100ms" }}>
+          <label className={`block text-xs font-mono uppercase tracking-wider mb-2 ${textMuted}`}>
+            Notas para la próxima
           </label>
           <textarea
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
-            placeholder="¿Qué ajustarías para la próxima?"
+            placeholder="Moler más fino, menos agua de bloom..."
             rows={2}
-            className={`w-full bg-transparent border-2 rounded-lg px-4 py-3 resize-none transition-all ${
-              isDark
-                ? "border-white/20 text-[var(--flow-text-primary)] placeholder:text-[var(--flow-text-muted)] focus:border-white/40"
-                : "border-[#3c2415]/20 text-[var(--flow-text-dark-primary)] placeholder:text-[var(--flow-text-dark-muted)] focus:border-[#3c2415]/40"
-            }`}
+            className={`w-full bg-[var(--charred)] border-2 border-[var(--concrete-light)] px-4 py-3 resize-none ${textPrimary} placeholder:${textMuted} focus:border-[var(--amber)] focus:outline-none`}
           />
+        </div>
+
+        {/* Recipe Summary */}
+        <div className="flow-enter border-2 border-[var(--concrete-light)] p-4" style={{ animationDelay: "150ms" }}>
+          <p className={`text-xs font-mono uppercase tracking-wider mb-3 ${textMuted}`}>
+            Receta
+          </p>
+          <div className="flex justify-between items-center">
+            <div className="text-center">
+              <p className={`font-mono text-2xl ${textPrimary}`}>{state.doseG}g</p>
+              <p className={`text-[10px] uppercase ${textMuted}`}>Café</p>
+            </div>
+            <div className={`text-2xl ${textMuted}`}>/</div>
+            <div className="text-center">
+              <p className={`font-mono text-2xl ${textPrimary}`}>{state.waterG}g</p>
+              <p className={`text-[10px] uppercase ${textMuted}`}>Agua</p>
+            </div>
+            {state.grindSetting && (
+              <>
+                <div className={`text-2xl ${textMuted}`}>/</div>
+                <div className="text-center">
+                  <p className={`font-mono text-2xl ${textPrimary}`}>{state.grindSetting}</p>
+                  <p className={`text-[10px] uppercase ${textMuted}`}>Molienda</p>
+                </div>
+              </>
+            )}
+          </div>
         </div>
 
         {/* Error message */}
@@ -316,84 +220,33 @@ export function FlowResults() {
           <p className="text-red-400 text-sm text-center">{error}</p>
         )}
 
-        {/* Navigation */}
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 pt-4 flow-enter" style={{ animationDelay: "250ms" }}>
-          <button
-            onClick={prevPhase}
-            className={`flow-btn-primary ${isDark ? "" : "flow-btn-dark"} opacity-60 hover:opacity-100`}
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M13 4l-6 6 6 6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Atrás
-          </button>
-
+        {/* Actions */}
+        <div className="space-y-3 pt-2 flow-enter" style={{ animationDelay: "200ms" }}>
           <button
             onClick={handleSave}
             disabled={isSubmitting}
-            className={`flow-btn-primary flex-1 ${isDark ? "" : "flow-btn-dark"} ${
+            className={`w-full py-4 font-display text-xl tracking-wider bg-[var(--amber)] text-[var(--charred)] hover:bg-[var(--crema)] transition-colors ${
               isSubmitting ? "opacity-60 cursor-not-allowed" : ""
             }`}
           >
-            {isSubmitting ? (
-              <>
-                <svg
-                  className="animate-spin"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    className="opacity-25"
-                  />
-                  <path
-                    d="M12 2a10 10 0 0 1 10 10"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                Guardando...
-              </>
-            ) : (
-              <>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M20 6L9 17l-5-5"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                Guardar
-              </>
-            )}
+            {isSubmitting ? "GUARDANDO..." : "GUARDAR"}
           </button>
-        </div>
 
-        {/* Discard link */}
-        <button
-          onClick={() => router.push("/")}
-          className={`w-full text-center text-sm ${
-            isDark ? "text-[var(--flow-text-muted)]" : "text-[var(--flow-text-dark-muted)]"
-          } hover:underline`}
-        >
-          Descartar y volver al inicio
-        </button>
+          <div className="flex gap-3">
+            <button
+              onClick={prevPhase}
+              className={`flex-1 py-3 border-2 border-[var(--concrete-light)] font-mono text-sm uppercase tracking-wider ${textSecondary} hover:border-[var(--amber)] transition-colors`}
+            >
+              ← Atrás
+            </button>
+            <button
+              onClick={() => router.push("/")}
+              className={`flex-1 py-3 border-2 border-[var(--concrete-light)] font-mono text-sm uppercase tracking-wider ${textMuted} hover:border-red-500/50 hover:text-red-400 transition-colors`}
+            >
+              Descartar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
