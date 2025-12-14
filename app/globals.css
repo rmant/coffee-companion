@@ -767,7 +767,7 @@
   font-size: 1.25rem;
   letter-spacing: 0.1em;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
   min-height: 60px;
   min-width: 220px;
@@ -791,7 +791,7 @@
   background: rgba(45, 42, 38, 0.8);
   border: 2px solid var(--concrete-light);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
   text-align: left;
   min-width: 280px;
 }
@@ -819,7 +819,7 @@
   text-align: center;
   width: 100%;
   max-width: 150px;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .flow-input:focus {
@@ -863,7 +863,7 @@
   border: 2px solid var(--concrete-light);
   color: var(--stone);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .flow-exit-btn:hover {
