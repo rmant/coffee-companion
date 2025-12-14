@@ -117,7 +117,7 @@ export function FlowResults() {
   }
 
   return (
-    <div className="flow-content min-h-screen pt-20 pb-12 overflow-y-auto">
+    <div className="flow-content min-h-screen pt-28 pb-12 overflow-y-auto">
       {/* Header */}
       <div className="mb-8 flow-enter">
         <h2
