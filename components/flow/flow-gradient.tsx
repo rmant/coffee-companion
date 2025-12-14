@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 export type FlowPhase =
   | "welcome"
   | "coffee"
@@ -52,41 +50,11 @@ interface FlowGradientProps {
 }
 
 export function FlowGradient({ phase, className = "" }: FlowGradientProps) {
-  const [currentGradient, setCurrentGradient] = useState(phaseGradients[phase]);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  useEffect(() => {
-    const newGradient = phaseGradients[phase];
-    if (newGradient !== currentGradient) {
-      setIsTransitioning(true);
-      // Small delay to trigger CSS transition
-      const timer = setTimeout(() => {
-        setCurrentGradient(newGradient);
-        setIsTransitioning(false);
-      }, 50);
-      return () => clearTimeout(timer);
-    }
-  }, [phase, currentGradient]);
-
   return (
-    <div className={`flow-gradient ${className}`}>
-      {/* Current gradient layer */}
-      <div
-        className="absolute inset-0 transition-opacity duration-700"
-        style={{
-          background: currentGradient,
-          opacity: isTransitioning ? 0 : 1,
-        }}
-      />
-      {/* Incoming gradient layer */}
-      <div
-        className="absolute inset-0 transition-opacity duration-700"
-        style={{
-          background: phaseGradients[phase],
-          opacity: isTransitioning ? 1 : 0,
-        }}
-      />
-    </div>
+    <div
+      className={`flow-gradient ${className}`}
+      style={{ background: phaseGradients[phase] }}
+    />
   );
 }
 
