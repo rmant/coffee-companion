@@ -16,7 +16,7 @@ export default async function HomePage() {
       .from("brews")
       .select("*, coffees(name, roaster)")
       .order("brewed_at", { ascending: false })
-      .limit(5),
+      .limit(6),
     supabase
       .from("coffees")
       .select("*", { count: "exact", head: true })
@@ -53,145 +53,105 @@ export default async function HomePage() {
   const streak = calculateStreak();
 
   return (
-    <div className="min-h-[80vh] flex flex-col">
-      {/* Hero Section - Start Brew CTA */}
-      <section className="flex-1 flex flex-col items-center justify-center py-16 relative">
-        {/* Decorative background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.03]"
-            style={{
-              background: "radial-gradient(circle, #3c2415 0%, transparent 70%)",
-            }}
-          />
+    <div className="min-h-[85vh] flex flex-col">
+      {/* Hero Section - Brutalist */}
+      <section className="flex-1 flex items-center py-16 relative">
+        {/* Decorative grid lines */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+          <div className="absolute top-0 left-[20%] w-px h-full bg-gradient-to-b from-transparent via-amber to-transparent" />
+          <div className="absolute top-0 left-[80%] w-px h-full bg-gradient-to-b from-transparent via-concrete-light to-transparent" />
+          <div className="absolute top-[30%] left-0 w-full h-px bg-gradient-to-r from-transparent via-amber to-transparent" />
         </div>
 
-        {/* Coffee cup icon with steam */}
-        <div className="relative mb-8">
-          <div className="absolute -top-8 left-1/2 -translate-x-1/2 flex gap-2 opacity-40">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className="w-1.5 h-6 rounded-full bg-[#3c2415]"
-                style={{
-                  animation: "flow-steam 2s ease-in-out infinite",
-                  animationDelay: `${i * 300}ms`,
-                }}
-              />
-            ))}
-          </div>
-          <svg
-            width="100"
-            height="100"
-            viewBox="0 0 100 100"
-            fill="none"
-            className="text-[#3c2415]"
-          >
-            <path
-              d="M15 30h50v45a12 12 0 01-12 12H27a12 12 0 01-12-12V30z"
-              fill="currentColor"
-              opacity="0.1"
-            />
-            <path
-              d="M15 30h50v45a12 12 0 01-12 12H27a12 12 0 01-12-12V30z"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M65 38h8a10 10 0 010 20h-8"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-          </svg>
-        </div>
+        <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
+          {/* Left column - Typography hero */}
+          <div className="stagger-children">
+            {/* Small label */}
+            <div className="flex items-center gap-3 mb-6">
+              <span className="font-mono text-xs tracking-[0.3em] text-stone uppercase">
+                Pour-Over Journal
+              </span>
+              <span className="w-12 h-px bg-amber" />
+            </div>
 
-        {/* Main heading */}
-        <h1
-          className="flow-display text-5xl md:text-6xl text-[#3c2415] mb-4 text-center"
-        >
-          Coffee Companion
-        </h1>
+            {/* Main headline */}
+            <h1 className="font-display text-7xl md:text-8xl lg:text-9xl text-paper leading-[0.85] mb-6">
+              <span className="block text-amber">FILTRADO</span>
+            </h1>
 
-        {/* Tagline */}
-        <p
-          className="flow-display-light text-xl text-[#5a3d2b] mb-10 text-center max-w-md"
-        >
-          Tu guía personal para la preparación perfecta
-        </p>
-
-        {/* Start Brew button */}
-        <Link
-          href="/brews/new"
-          className="group relative inline-flex items-center gap-3 px-10 py-5 bg-[#3c2415] text-[#faf6f0] rounded-full text-xl transition-all hover:scale-105 hover:shadow-2xl active:scale-100"
-          style={{
-            boxShadow: "0 8px 30px rgba(60, 36, 21, 0.3)",
-          }}
-        >
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="group-hover:rotate-90 transition-transform duration-300"
-          >
-            <path
-              d="M12 5v14M5 12h14"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-            />
-          </svg>
-          <span className="flow-display">Comenzar Preparación</span>
-        </Link>
-
-        {/* Quick stats */}
-        <div className="flex items-center gap-8 mt-12 text-center">
-          <div>
-            <p className="flow-mono text-3xl text-[#3c2415]">
-              {totalBrewCount || 0}
+            {/* Tagline */}
+            <p className="font-body text-xl text-stone italic max-w-md mb-10">
+              Tu diario personal para la preparación perfecta de café especialidad
             </p>
-            <p className="text-sm text-[#5a3d2b] mt-1">preparaciones</p>
-          </div>
-          <div className="w-px h-10 bg-[#3c2415] opacity-20" />
-          <div>
-            <p className="flow-mono text-3xl text-[#3c2415]">
-              {activeCoffeeCount || 0}
-            </p>
-            <p className="text-sm text-[#5a3d2b] mt-1">cafés activos</p>
-          </div>
-          {streak > 0 && (
-            <>
-              <div className="w-px h-10 bg-[#3c2415] opacity-20" />
-              <div>
-                <p className="flow-mono text-3xl text-[#c45c3e]">
-                  {streak}
-                </p>
-                <p className="text-sm text-[#5a3d2b] mt-1">días seguidos</p>
-              </div>
-            </>
-          )}
-        </div>
-      </section>
 
-      {/* Recent Brews Section */}
-      {recentBrews && recentBrews.length > 0 && (
-        <section className="py-12 border-t border-[#3c2415]/10">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="flow-display text-2xl text-[#3c2415]">
-              Preparaciones Recientes
-            </h2>
+            {/* CTA Button */}
             <Link
-              href="/brews"
-              className="text-sm text-[#c45c3e] hover:text-[#3c2415] transition-colors"
+              href="/brews/new"
+              className="btn-brutalist text-xl px-8 py-5 inline-flex"
             >
-              Ver todas →
+              <span className="btn-brutalist-plus text-2xl">+</span>
+              NUEVA PREPARACIÓN
             </Link>
           </div>
 
-          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          {/* Right column - Stats grid */}
+          <div className="grid grid-cols-2 gap-6">
+            {/* Total brews */}
+            <div className="brutalist-card p-8">
+              <div className="stat-brutalist">
+                <span className="stat-number">{totalBrewCount || 0}</span>
+                <span className="stat-label">Preparaciones</span>
+              </div>
+            </div>
+
+            {/* Active coffees */}
+            <div className="brutalist-card p-8">
+              <div className="stat-brutalist">
+                <span className="stat-number">{activeCoffeeCount || 0}</span>
+                <span className="stat-label">Cafés Activos</span>
+              </div>
+            </div>
+
+            {/* Streak */}
+            <div className="brutalist-card col-span-2 p-8 flex items-center justify-between">
+              <div className="stat-brutalist">
+                <span className="stat-number text-crema">{streak}</span>
+                <span className="stat-label">Días Seguidos</span>
+              </div>
+              <div className="text-right">
+                <p className="font-mono text-xs text-stone uppercase tracking-wider mb-1">
+                  Racha Actual
+                </p>
+                <p className="font-body text-sm text-paper/60 italic">
+                  {streak > 0 ? "¡Sigue así!" : "Comienza hoy"}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="divider-brutalist">
+        <span className="divider-brutalist-text">Actividad Reciente</span>
+      </div>
+
+      {/* Recent Brews Section */}
+      {recentBrews && recentBrews.length > 0 && (
+        <section className="py-8">
+          <div className="flex items-end justify-between mb-8">
+            <div className="section-header flex-1 border-none pb-0 mb-0">
+              <h2 className="section-title">PREPARACIONES</h2>
+            </div>
+            <Link
+              href="/brews"
+              className="brutalist-tag hover:bg-amber hover:text-charred"
+            >
+              Ver Todas →
+            </Link>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 stagger-children">
             {recentBrews.slice(0, 6).map((brew) => {
               const brewWithRatio = withRatio(brew);
               const coffee = brew.coffees as { name: string; roaster: string } | null;
@@ -203,56 +163,43 @@ export default async function HomePage() {
                 <Link
                   key={brew.id}
                   href={`/brews/${brew.id}`}
-                  className="group flex items-center gap-4 p-4 rounded-xl border border-[#3c2415]/10 hover:border-[#c45c3e]/40 hover:bg-[#faf6f0] transition-all"
+                  className="brutalist-card group flex items-start gap-4"
                 >
-                  {/* Rating or placeholder */}
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#f0ebe3] flex items-center justify-center">
+                  {/* Rating badge */}
+                  <div className="flex-shrink-0 w-14 h-14 bg-charred flex items-center justify-center border-2 border-concrete-light group-hover:border-amber transition-colors">
                     {brew.rating ? (
-                      <span className="flow-mono text-lg text-[#3c2415]">
+                      <span className="font-display text-2xl text-amber">
                         {brew.rating}
                       </span>
                     ) : (
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        className="text-[#8a7a6a]"
-                      >
-                        <path
-                          d="M6 10h12v10a2 2 0 01-2 2H8a2 2 0 01-2-2V10z"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M18 12h1a3 3 0 010 6h-1"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        />
-                      </svg>
+                      <span className="font-mono text-xs text-stone">—</span>
                     )}
                   </div>
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-[#3c2415] truncate group-hover:text-[#c45c3e] transition-colors">
-                      {coffee?.name || "Café"}
+                    <p className="font-display text-lg text-paper truncate group-hover:text-amber transition-colors">
+                      {coffee?.name || "CAFÉ"}
                     </p>
-                    <div className="flex items-center gap-2 text-sm text-[#8a7a6a]">
-                      <span className="flow-mono">
-                        {brew.dose_g}g · {formatBrewTime(brew.total_time_s)}
-                      </span>
+                    <p className="font-body text-sm text-stone truncate mb-2">
+                      {coffee?.roaster || "—"}
+                    </p>
+                    <div className="flex items-center gap-3 font-mono text-xs text-stone">
+                      <span>{brew.dose_g}g</span>
+                      <span className="text-amber">/</span>
+                      <span>{formatBrewTime(brew.total_time_s)}</span>
                       {brewWithRatio.ratio && (
-                        <span className="text-xs px-1.5 py-0.5 rounded bg-[#f0ebe3]">
-                          {brewWithRatio.ratio}
-                        </span>
+                        <>
+                          <span className="text-amber">/</span>
+                          <span className="text-paper">{brewWithRatio.ratio}</span>
+                        </>
                       )}
                     </div>
                   </div>
 
                   {/* Time */}
                   <div className="flex-shrink-0 text-right">
-                    <p className="text-xs text-[#8a7a6a]">
+                    <p className="font-mono text-[10px] text-stone uppercase tracking-wider">
                       {isToday
                         ? brewDate.toLocaleTimeString("es-ES", {
                             hour: "numeric",
@@ -273,36 +220,50 @@ export default async function HomePage() {
 
       {/* Empty state */}
       {(!recentBrews || recentBrews.length === 0) && (
-        <section className="py-12 border-t border-[#3c2415]/10 text-center">
-          <p className="text-[#8a7a6a] mb-2">
-            Aún no tienes preparaciones registradas
-          </p>
-          <p className="flow-display-light text-[#c45c3e]">
-            ¡Comienza tu viaje cafetero ahora!
-          </p>
+        <section className="py-16 text-center">
+          <div className="brutalist-card inline-block p-12">
+            <p className="font-mono text-sm text-stone uppercase tracking-wider mb-4">
+              Sin preparaciones aún
+            </p>
+            <p className="font-body text-xl text-paper italic mb-6">
+              ¡Comienza tu viaje cafetero!
+            </p>
+            <Link href="/brews/new" className="btn-brutalist">
+              <span className="btn-brutalist-plus">+</span>
+              PRIMERA PREPARACIÓN
+            </Link>
+          </div>
         </section>
       )}
 
-      {/* Quick links */}
-      <section className="py-8 flex justify-center gap-8 text-sm">
-        <Link
-          href="/coffees"
-          className="text-[#5a3d2b] hover:text-[#c45c3e] transition-colors"
-        >
-          Mis Cafés
-        </Link>
-        <Link
-          href="/brewers"
-          className="text-[#5a3d2b] hover:text-[#c45c3e] transition-colors"
-        >
-          Mis Cafeteras
-        </Link>
-        <Link
-          href="/brews"
-          className="text-[#5a3d2b] hover:text-[#c45c3e] transition-colors"
-        >
-          Historial
-        </Link>
+      {/* Quick Navigation */}
+      <section className="py-10 mt-auto">
+        <div className="grid grid-cols-3 gap-4">
+          <Link
+            href="/coffees"
+            className="brutalist-card p-6 text-center group"
+          >
+            <span className="font-display text-xl text-stone group-hover:text-amber transition-colors">
+              MIS CAFÉS
+            </span>
+          </Link>
+          <Link
+            href="/brewers"
+            className="brutalist-card p-6 text-center group"
+          >
+            <span className="font-display text-xl text-stone group-hover:text-amber transition-colors">
+              MIS CAFETERAS
+            </span>
+          </Link>
+          <Link
+            href="/brews"
+            className="brutalist-card p-6 text-center group"
+          >
+            <span className="font-display text-xl text-stone group-hover:text-amber transition-colors">
+              HISTORIAL
+            </span>
+          </Link>
+        </div>
       </section>
     </div>
   );

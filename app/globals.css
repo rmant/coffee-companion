@@ -3,7 +3,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Indie Coffee Journal Theme */
+/* ========================================
+   KISSATEN BRUTALIST THEME
+   Japanese Coffee House × Concrete Aesthetics
+   ======================================== */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -49,121 +53,94 @@
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.25rem;
 
-  /* Warm Analog Palette */
-  --cream: #faf6f0;
-  --cream-dark: #f0ebe3;
-  --parchment: #e8e0d5;
-  --espresso: #3c2415;
-  --espresso-light: #5a3d2b;
-  --roast: #6b4423;
-  --terracotta: #c45c3e;
-  --terracotta-muted: #d4836a;
-  --olive: #5c6b4a;
-  --sage: #8a9a78;
-  --ink: #2a2420;
-  --ink-light: #4a4540;
-
-  /* ========================================
-     FLOW STATE DESIGN SYSTEM
-     ======================================== */
-
-  /* Flow Phase Gradients */
-  --flow-gradient-welcome: linear-gradient(165deg, #faf6f0 0%, #f5efe6 50%, #e8e0d5 100%);
-  --flow-gradient-select: linear-gradient(165deg, #f5efe6 0%, #e8d5c4 50%, #dbc9b0 100%);
-  --flow-gradient-settings: linear-gradient(165deg, #e8d5c4 0%, #d4c4a4 50%, #c4b494 100%);
-  --flow-gradient-ready: linear-gradient(165deg, #d4a574 0%, #c4864a 50%, #b47640 100%);
-  --flow-gradient-bloom: linear-gradient(165deg, #c4864a 0%, #a67038 50%, #8a5c2a 100%);
-  --flow-gradient-pour-1: linear-gradient(165deg, #8b5a2b 0%, #6b4423 50%, #5a3d2b 100%);
-  --flow-gradient-pour-2: linear-gradient(165deg, #7a4a25 0%, #5a3a20 50%, #4a301a 100%);
-  --flow-gradient-pour-3: linear-gradient(165deg, #6a3a1b 0%, #4a2c17 50%, #3a2212 100%);
-  --flow-gradient-pour-4: linear-gradient(165deg, #5a2a15 0%, #3a1c0f 50%, #2a140a 100%);
-  --flow-gradient-pour-5: linear-gradient(165deg, #4a2010 0%, #2a140a 50%, #1a0a05 100%);
-  --flow-gradient-drawdown: linear-gradient(165deg, #4a2c17 0%, #3c2415 50%, #2a1a0f 100%);
-  --flow-gradient-complete: linear-gradient(165deg, #d4a574 0%, #c9a66b 30%, #b8956b 70%, #d4a574 100%);
-
-  /* Flow Timer Colors */
-  --flow-timer-track: rgba(255, 255, 255, 0.15);
-  --flow-timer-progress: rgba(255, 255, 255, 0.9);
-  --flow-timer-glow: rgba(255, 255, 255, 0.3);
-
-  /* Flow Text Colors (for dark backgrounds) */
-  --flow-text-primary: rgba(255, 255, 255, 0.95);
-  --flow-text-secondary: rgba(255, 255, 255, 0.7);
-  --flow-text-muted: rgba(255, 255, 255, 0.5);
-
-  /* Flow Text Colors (for light backgrounds) */
-  --flow-text-dark-primary: #3c2415;
-  --flow-text-dark-secondary: #5a3d2b;
-  --flow-text-dark-muted: #8a7a6a;
+  /* Kissaten Brutalist Palette */
+  --charred: #1a1815;
+  --concrete: #2d2a26;
+  --concrete-light: #3d3a35;
+  --stone: #8a857a;
+  --amber: #e07a3d;
+  --amber-bright: #f4923d;
+  --crema: #d4a853;
+  --paper: #f5f0e8;
+  --paper-dark: #e8e0d4;
+  --ink: #0f0e0d;
 
   /* Semantic tokens */
-  --background: var(--cream);
-  --foreground: var(--ink);
-  --card: #fffcf7;
-  --card-foreground: var(--ink);
-  --popover: var(--card);
-  --popover-foreground: var(--ink);
-  --primary: var(--espresso);
-  --primary-foreground: var(--cream);
-  --secondary: var(--parchment);
-  --secondary-foreground: var(--espresso);
-  --muted: var(--cream-dark);
-  --muted-foreground: var(--ink-light);
-  --accent: var(--terracotta);
-  --accent-foreground: #fff;
-  --destructive: #b44a3a;
-  --border: #d4cdc4;
-  --input: #d4cdc4;
-  --ring: var(--terracotta);
-  --chart-1: var(--terracotta);
-  --chart-2: var(--olive);
-  --chart-3: var(--roast);
-  --chart-4: var(--sage);
-  --chart-5: var(--espresso-light);
-  --sidebar: var(--cream-dark);
-  --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--espresso);
-  --sidebar-primary-foreground: var(--cream);
-  --sidebar-accent: var(--parchment);
-  --sidebar-accent-foreground: var(--espresso);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--terracotta);
+  --background: var(--charred);
+  --foreground: var(--paper);
+  --card: var(--concrete);
+  --card-foreground: var(--paper);
+  --popover: var(--concrete);
+  --popover-foreground: var(--paper);
+  --primary: var(--amber);
+  --primary-foreground: var(--charred);
+  --secondary: var(--concrete-light);
+  --secondary-foreground: var(--paper);
+  --muted: var(--concrete);
+  --muted-foreground: var(--stone);
+  --accent: var(--crema);
+  --accent-foreground: var(--charred);
+  --destructive: #c44a3a;
+  --border: var(--concrete-light);
+  --input: var(--concrete-light);
+  --ring: var(--amber);
+  --chart-1: var(--amber);
+  --chart-2: var(--crema);
+  --chart-3: #8a6a4a;
+  --chart-4: var(--stone);
+  --chart-5: #5a4a3a;
+  --sidebar: var(--concrete);
+  --sidebar-foreground: var(--paper);
+  --sidebar-primary: var(--amber);
+  --sidebar-primary-foreground: var(--charred);
+  --sidebar-accent: var(--concrete-light);
+  --sidebar-accent-foreground: var(--paper);
+  --sidebar-border: var(--concrete-light);
+  --sidebar-ring: var(--amber);
+
+  /* Flow Phase Gradients - Kissaten style */
+  --flow-gradient-welcome: linear-gradient(165deg, #2d2a26 0%, #1a1815 100%);
+  --flow-gradient-select: linear-gradient(165deg, #3d3a35 0%, #2d2a26 100%);
+  --flow-gradient-settings: linear-gradient(165deg, #4a4540 0%, #3d3a35 100%);
+  --flow-gradient-ready: linear-gradient(165deg, #5a4a3a 0%, #4a3a2a 100%);
+  --flow-gradient-bloom: linear-gradient(165deg, #6a5a4a 0%, #5a4a3a 100%);
+  --flow-gradient-pour-1: linear-gradient(165deg, #7a5a3a 0%, #6a4a2a 100%);
+  --flow-gradient-pour-2: linear-gradient(165deg, #8a6a3a 0%, #7a5a2a 100%);
+  --flow-gradient-pour-3: linear-gradient(165deg, #9a7a4a 0%, #8a6a3a 100%);
+  --flow-gradient-pour-4: linear-gradient(165deg, #aa8a5a 0%, #9a7a4a 100%);
+  --flow-gradient-pour-5: linear-gradient(165deg, #ba9a6a 0%, #aa8a5a 100%);
+  --flow-gradient-drawdown: linear-gradient(165deg, #8a6a4a 0%, #6a4a3a 100%);
+  --flow-gradient-complete: linear-gradient(165deg, #e07a3d 0%, #d4a853 50%, #e07a3d 100%);
+
+  /* Flow Timer Colors */
+  --flow-timer-track: rgba(245, 240, 232, 0.1);
+  --flow-timer-progress: var(--amber);
+  --flow-timer-glow: rgba(224, 122, 61, 0.4);
+
+  /* Flow Text Colors */
+  --flow-text-primary: var(--paper);
+  --flow-text-secondary: rgba(245, 240, 232, 0.7);
+  --flow-text-muted: rgba(245, 240, 232, 0.4);
 }
 
-.dark {
-  --background: #1a1614;
-  --foreground: #e8e0d5;
-  --card: #252019;
-  --card-foreground: #e8e0d5;
-  --popover: #252019;
-  --popover-foreground: #e8e0d5;
-  --primary: #d4cdc4;
-  --primary-foreground: #1a1614;
-  --secondary: #2d2822;
-  --secondary-foreground: #e8e0d5;
-  --muted: #2d2822;
-  --muted-foreground: #9a938a;
-  --accent: var(--terracotta);
-  --accent-foreground: #fff;
-  --destructive: #c45c4e;
-  --border: #3d362e;
-  --input: #3d362e;
-  --ring: var(--terracotta);
-  --chart-1: var(--terracotta);
-  --chart-2: var(--sage);
-  --chart-3: #c4a574;
-  --chart-4: #8a7a6a;
-  --chart-5: #d4836a;
-  --sidebar: #252019;
-  --sidebar-foreground: #e8e0d5;
-  --sidebar-primary: var(--terracotta);
-  --sidebar-primary-foreground: #fff;
-  --sidebar-accent: #2d2822;
-  --sidebar-accent-foreground: #e8e0d5;
-  --sidebar-border: #3d362e;
-  --sidebar-ring: var(--terracotta);
+/* Light theme variant (optional) */
+.light {
+  --background: var(--paper);
+  --foreground: var(--charred);
+  --card: var(--paper-dark);
+  --card-foreground: var(--charred);
+  --popover: var(--paper-dark);
+  --popover-foreground: var(--charred);
+  --primary: var(--amber);
+  --primary-foreground: var(--paper);
+  --secondary: #d4ccc0;
+  --secondary-foreground: var(--charred);
+  --muted: var(--paper-dark);
+  --muted-foreground: #6a6560;
+  --border: #c4bab0;
+  --input: #c4bab0;
 }
 
 @layer base {
@@ -173,352 +150,471 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body), "Source Serif 4", Georgia, serif;
     font-feature-settings: "liga" 1, "calt" 1;
   }
 
-  /* Paper texture overlay */
+  /* Concrete texture overlay */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.06;
     pointer-events: none;
     z-index: 1000;
+    mix-blend-mode: overlay;
+  }
+
+  /* Secondary grain layer */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(224, 122, 61, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(212, 168, 83, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 999;
   }
 }
 
-/* Display heading styles */
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-/* Indie handwritten accent */
-.font-hand {
-  font-family: var(--font-hand), cursive;
-}
-
-/* Coffee bean rating icons */
-.coffee-bean {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  background: currentColor;
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M12 2C9.5 2 7.5 4 7.5 6.5c0 1.5.7 2.8 1.8 3.7-.3.2-.5.5-.8.8C6.5 13 5 16 5 19c0 1.7 1.3 3 3 3h8c1.7 0 3-1.3 3-3 0-3-1.5-6-3.5-8-.3-.3-.5-.6-.8-.8 1.1-.9 1.8-2.2 1.8-3.7C16.5 4 14.5 2 12 2zm0 2c1.4 0 2.5 1.1 2.5 2.5S13.4 9 12 9s-2.5-1.1-2.5-2.5S10.6 4 12 4z'/%3E%3C/svg%3E");
-  mask-size: contain;
-  mask-repeat: no-repeat;
-}
-
-/* Stamp-like badge effect */
-.stamp {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.75rem;
-  border: 2px solid currentColor;
-  border-radius: 2px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transform: rotate(-2deg);
-  transition: transform 0.2s ease;
-}
-
-.stamp::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border: 1px dashed currentColor;
-  opacity: 0.4;
-  border-radius: 4px;
-}
-
-.stamp:hover {
-  transform: rotate(0deg);
-}
-
-/* Journal card styling */
-.journal-card {
-  position: relative;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  box-shadow:
-    0 1px 2px rgba(60, 36, 21, 0.04),
-    0 4px 12px rgba(60, 36, 21, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.journal-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 1.5rem;
-  right: 1.5rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-}
-
-.journal-card:hover {
-  transform: translateY(-2px) rotate(0.5deg);
-  box-shadow:
-    0 4px 8px rgba(60, 36, 21, 0.08),
-    0 12px 24px rgba(60, 36, 21, 0.12);
-}
-
-/* Indie underline decoration */
-.indie-underline {
-  position: relative;
-  display: inline-block;
-}
-
-.indie-underline::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--terracotta);
-  border-radius: 2px;
-  transform: rotate(-1deg) scaleX(1.05);
-}
-
-/* Handwritten annotation style */
-.annotation {
-  position: relative;
-  display: inline-block;
-  color: var(--terracotta);
-  font-style: italic;
-}
-
-.annotation::before {
-  content: "~";
-  margin-right: 0.25em;
-}
-
-.annotation::after {
-  content: "~";
-  margin-left: 0.25em;
-}
-
-/* Coffee ring stain decoration */
-.coffee-ring {
-  position: relative;
-}
-
-.coffee-ring::after {
-  content: "";
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 2px solid var(--espresso);
-  opacity: 0.06;
-  pointer-events: none;
-}
-
-.coffee-ring-tl::after {
-  top: -20px;
-  left: -20px;
-}
-
-.coffee-ring-br::after {
-  bottom: -20px;
-  right: -20px;
-}
-
-/* Vintage button style */
-.btn-vintage {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  background: var(--espresso);
-  color: var(--cream);
-  border: none;
-  border-radius: 4px;
-  font-weight: 500;
+  font-family: var(--font-display), "Bebas Neue", Impact, sans-serif;
+  font-weight: 400;
   letter-spacing: 0.02em;
-  box-shadow:
-    0 2px 0 var(--espresso-light),
-    0 4px 8px rgba(60, 36, 21, 0.2);
-  transition: all 0.15s ease;
+  text-transform: uppercase;
 }
 
-.btn-vintage:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    0 3px 0 var(--espresso-light),
-    0 6px 12px rgba(60, 36, 21, 0.25);
+.font-body {
+  font-family: var(--font-body), "Source Serif 4", Georgia, serif;
 }
 
-.btn-vintage:active {
-  transform: translateY(1px);
-  box-shadow:
-    0 1px 0 var(--espresso-light),
-    0 2px 4px rgba(60, 36, 21, 0.15);
+.font-mono {
+  font-family: var(--font-mono), "Space Mono", monospace;
+  font-variant-numeric: tabular-nums;
 }
 
-/* Divider with coffee motif */
-.divider-coffee {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: var(--muted-foreground);
-}
 
-.divider-coffee::before,
-.divider-coffee::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-}
+/* ========================================
+   BRUTALIST HEADER
+   ======================================== */
 
-/* Lined paper effect */
-.lined-paper {
-  background-image: repeating-linear-gradient(
-    transparent,
-    transparent 27px,
-    var(--border) 27px,
-    var(--border) 28px
-  );
-  background-position: 0 1rem;
-}
-
-/* Page curl effect on cards */
-.page-curl {
+.brutalist-header {
+  background: var(--charred);
+  border-bottom: 3px solid var(--amber);
   position: relative;
   overflow: hidden;
 }
 
-.page-curl::after {
+.brutalist-header::before {
   content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 100px,
+      rgba(224, 122, 61, 0.03) 100px,
+      rgba(224, 122, 61, 0.03) 101px
+    );
+  pointer-events: none;
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+
+.header-accent {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(
-    -45deg,
-    var(--cream-dark) 50%,
-    transparent 50%
-  );
-  box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.05);
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 50%, rgba(224, 122, 61, 0.1) 50%);
+  pointer-events: none;
 }
 
-/* Stat number styling */
-.stat-number {
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--espresso);
-  letter-spacing: -0.03em;
-}
-
-/* Navigation link hover effect */
-.nav-link {
+/* Navigation Links - Brutalist */
+.nav-brutalist {
   position: relative;
-  padding: 0.25rem 0;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--terracotta);
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-/* Tag/chip styling */
-.indie-tag {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 0.25rem 0.625rem;
-  background: var(--cream-dark);
-  border: 1px solid var(--border);
-  border-radius: 99px;
-  font-size: 0.75rem;
-  color: var(--ink-light);
+  padding: 0.5rem 0.75rem;
   transition: all 0.2s ease;
 }
 
-.indie-tag:hover {
-  background: var(--parchment);
-  border-color: var(--espresso-light);
-  color: var(--espresso);
-}
-
-/* Rating beans */
-.rating-beans {
-  display: inline-flex;
-  gap: 0.125rem;
-}
-
-.rating-bean {
-  width: 1rem;
-  height: 1rem;
-  color: var(--parchment);
+.nav-brutalist-text {
+  font-family: var(--font-display), "Bebas Neue", sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  color: var(--stone);
   transition: color 0.2s ease;
 }
 
-.rating-bean.filled {
-  color: var(--roast);
+.nav-brutalist:hover .nav-brutalist-text {
+  color: var(--paper);
 }
 
-.rating-bean.half {
-  background: linear-gradient(90deg, var(--roast) 50%, var(--parchment) 50%);
-  -webkit-background-clip: text;
-  background-clip: text;
+.nav-brutalist::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--amber);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
-/* Input focus states */
-input:focus,
-textarea:focus,
-select:focus {
+.nav-brutalist:hover::after {
+  width: 100%;
+}
+
+/* Brutalist Button */
+.btn-brutalist {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--amber);
+  color: var(--charred);
+  font-family: var(--font-display), "Bebas Neue", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  border: none;
+  position: relative;
+  transition: all 0.15s ease;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+}
+
+.btn-brutalist::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.btn-brutalist:hover {
+  background: var(--amber-bright);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--crema);
+}
+
+.btn-brutalist:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-brutalist-plus {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ========================================
+   BRUTALIST FOOTER
+   ======================================== */
+
+.brutalist-footer {
+  background: var(--ink);
+  border-top: 1px solid var(--concrete-light);
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ========================================
+   MAIN CONTENT AREA
+   ======================================== */
+
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  min-height: calc(100vh - 200px);
+}
+
+/* ========================================
+   BRUTALIST CARDS
+   ======================================== */
+
+.brutalist-card {
+  position: relative;
+  background: var(--concrete);
+  border: 1px solid var(--concrete-light);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+
+.brutalist-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--amber);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.brutalist-card:hover {
+  transform: translateY(-4px) translateX(-2px);
+  box-shadow:
+    6px 6px 0 var(--concrete-light),
+    12px 12px 0 rgba(224, 122, 61, 0.2);
+}
+
+.brutalist-card:hover::before {
+  opacity: 1;
+}
+
+
+/* ========================================
+   BRUTALIST INPUTS
+   ======================================== */
+
+.brutalist-input {
+  background: var(--charred);
+  border: 2px solid var(--concrete-light);
+  padding: 0.875rem 1rem;
+  color: var(--paper);
+  font-family: var(--font-mono), monospace;
+  transition: all 0.2s ease;
+}
+
+.brutalist-input:focus {
   outline: none;
-  border-color: var(--terracotta) !important;
-  box-shadow: 0 0 0 3px rgba(196, 92, 62, 0.15) !important;
+  border-color: var(--amber);
+  box-shadow: 4px 4px 0 rgba(224, 122, 61, 0.3);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+.brutalist-input::placeholder {
+  color: var(--stone);
+  opacity: 0.6;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--cream-dark);
+/* Brutalist Select */
+.brutalist-select {
+  background: var(--charred);
+  border: 2px solid var(--concrete-light);
+  padding: 0.875rem 1rem;
+  color: var(--paper);
+  font-family: var(--font-body), serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 5px;
-  border: 2px solid var(--cream-dark);
+.brutalist-select:focus {
+  outline: none;
+  border-color: var(--amber);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--ink-light);
+/* ========================================
+   SECTION HEADERS
+   ======================================== */
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--concrete-light);
 }
 
-/* Animations */
-@keyframes fadeInUp {
+.section-title {
+  font-family: var(--font-display), "Bebas Neue", sans-serif;
+  font-size: clamp(2rem, 8vw, 4rem);
+  color: var(--paper);
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+}
+
+
+.section-subtitle {
+  font-family: var(--font-body), serif;
+  font-size: 1rem;
+  color: var(--stone);
+  font-style: italic;
+}
+
+/* ========================================
+   STATS & NUMBERS
+   ======================================== */
+
+.stat-brutalist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-number {
+  font-family: var(--font-display), "Bebas Neue", sans-serif;
+  font-size: 3.5rem;
+  color: var(--amber);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  color: var(--stone);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* ========================================
+   TAGS & BADGES
+   ======================================== */
+
+.brutalist-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  background: var(--concrete-light);
+  color: var(--paper);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-left: 3px solid var(--amber);
+  transition: all 0.2s ease;
+}
+
+.brutalist-tag:hover {
+  background: var(--amber);
+  color: var(--charred);
+}
+
+.brutalist-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.625rem;
+  background: var(--amber);
+  color: var(--charred);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  clip-path: polygon(4px 0, 100% 0, 100% 100%, 0 100%, 0 4px);
+}
+
+/* ========================================
+   RATING DISPLAY
+   ======================================== */
+
+.rating-brutalist {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.rating-bean {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: var(--concrete-light);
+  transition: fill 0.2s ease;
+}
+
+.rating-bean.filled {
+  fill: var(--amber);
+}
+
+/* ========================================
+   DIVIDERS
+   ======================================== */
+
+.divider-brutalist {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.divider-brutalist::before,
+.divider-brutalist::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--concrete-light);
+}
+
+.divider-brutalist-text {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.625rem;
+  color: var(--stone);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* ========================================
+   GRID LAYOUTS
+   ======================================== */
+
+.grid-brutalist {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* Asymmetric grid for visual interest */
+.grid-asymmetric {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.grid-asymmetric > *:nth-child(3n+1) {
+  grid-column: span 5;
+}
+
+.grid-asymmetric > *:nth-child(3n+2) {
+  grid-column: span 4;
+}
+
+.grid-asymmetric > *:nth-child(3n) {
+  grid-column: span 3;
+}
+
+@media (max-width: 768px) {
+  .grid-asymmetric > * {
+    grid-column: span 12 !important;
+  }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -526,135 +622,65 @@ select:focus {
   }
 }
 
-@keyframes wiggle {
-  0%, 100% { transform: rotate(-1deg); }
-  50% { transform: rotate(1deg); }
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.4s ease forwards;
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
 }
 
-.animate-wiggle {
-  animation: wiggle 0.3s ease;
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(224, 122, 61, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(224, 122, 61, 0.6);
+  }
 }
 
-/* Stagger children animations */
+.animate-slide-up {
+  animation: slideInUp 0.5s ease forwards;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.5s ease forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Stagger children */
 .stagger-children > * {
   opacity: 0;
-  animation: fadeInUp 0.4s ease forwards;
+  animation: slideInUp 0.5s ease forwards;
 }
 
 .stagger-children > *:nth-child(1) { animation-delay: 0ms; }
-.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
-.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
-.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
-.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
-.stagger-children > *:nth-child(6) { animation-delay: 250ms; }
-.stagger-children > *:nth-child(7) { animation-delay: 300ms; }
-.stagger-children > *:nth-child(8) { animation-delay: 350ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 320ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 400ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 480ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 560ms; }
 
 /* ========================================
-   FLOW STATE ANIMATIONS & STYLES
+   FLOW STATE STYLES (Kissaten Version)
    ======================================== */
 
-/* Breathing pulse for active elements */
-@keyframes flow-breathe {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.02);
-    opacity: 1;
-  }
-}
-
-/* Gradient fade transition */
-@keyframes flow-gradient-fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Timer glow pulse */
-@keyframes flow-timer-glow {
-  0%, 100% {
-    filter: drop-shadow(0 0 8px var(--flow-timer-glow));
-  }
-  50% {
-    filter: drop-shadow(0 0 20px var(--flow-timer-glow));
-  }
-}
-
-/* Text entrance animation */
-@keyframes flow-text-enter {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Text exit animation */
-@keyframes flow-text-exit {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-
-/* Celebration particle rise */
-@keyframes flow-particle-rise {
-  0% {
-    transform: translateY(0) scale(1) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh) scale(0.5) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-/* Countdown scale pulse */
-@keyframes flow-countdown-pulse {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-/* Steam rising effect */
-@keyframes flow-steam {
-  0% {
-    transform: translateY(0) scaleX(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(-20px) scaleX(1.2);
-    opacity: 0.3;
-  }
-  100% {
-    transform: translateY(-40px) scaleX(0.8);
-    opacity: 0;
-  }
-}
-
-/* Flow container - full screen immersive */
 .flow-container {
   position: fixed;
   inset: 0;
@@ -664,65 +690,15 @@ select:focus {
   justify-content: center;
   overflow: hidden;
   z-index: 100;
+  background: var(--charred);
 }
 
-/* Flow gradient background */
 .flow-gradient {
   position: absolute;
   inset: 0;
   transition: opacity 800ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.flow-gradient-enter {
-  animation: flow-gradient-fade 800ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-/* Flow typography - Display */
-.flow-display {
-  font-family: var(--font-flow-display), "Cormorant Garamond", Georgia, serif;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-.flow-display-light {
-  font-family: var(--font-flow-display), "Cormorant Garamond", Georgia, serif;
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: 0;
-  line-height: 1.3;
-}
-
-/* Flow typography - Mono (for timer) */
-.flow-mono {
-  font-family: var(--font-flow-mono), "JetBrains Mono", monospace;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-}
-
-/* Flow text sizes */
-.flow-text-hero {
-  font-size: clamp(3rem, 10vw, 6rem);
-}
-
-.flow-text-title {
-  font-size: clamp(2rem, 6vw, 3.5rem);
-}
-
-.flow-text-subtitle {
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-}
-
-.flow-text-body {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-}
-
-.flow-text-timer {
-  font-size: clamp(4rem, 15vw, 8rem);
-}
-
-/* Flow content wrapper */
 .flow-content {
   position: relative;
   z-index: 10;
@@ -736,7 +712,219 @@ select:focus {
   width: 100%;
 }
 
-/* Flow animation classes */
+/* Flow Typography */
+.flow-display {
+  font-family: var(--font-display), "Bebas Neue", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.flow-display-light {
+  font-family: var(--font-body), "Source Serif 4", serif;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+.flow-mono {
+  font-family: var(--font-mono), "Space Mono", monospace;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.flow-text-hero {
+  font-size: clamp(3rem, 12vw, 7rem);
+  line-height: 0.9;
+}
+
+.flow-text-title {
+  font-size: clamp(2rem, 8vw, 4rem);
+  line-height: 1;
+}
+
+.flow-text-subtitle {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.flow-text-body {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.flow-text-timer {
+  font-size: clamp(5rem, 20vw, 10rem);
+}
+
+/* Flow Buttons */
+.flow-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem 3rem;
+  background: var(--amber);
+  color: var(--charred);
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  min-height: 60px;
+  min-width: 220px;
+}
+
+.flow-btn-primary:hover {
+  background: var(--amber-bright);
+  transform: translateY(-2px) translateX(-2px);
+  box-shadow: 6px 6px 0 rgba(212, 168, 83, 0.4);
+}
+
+.flow-btn-primary:active {
+  transform: translateY(0) translateX(0);
+  box-shadow: none;
+}
+
+/* Flow Cards */
+.flow-card {
+  position: relative;
+  padding: 1.5rem;
+  background: rgba(45, 42, 38, 0.8);
+  border: 2px solid var(--concrete-light);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  min-width: 280px;
+}
+
+.flow-card:hover {
+  border-color: var(--amber);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.flow-card.selected {
+  border-color: var(--amber);
+  background: rgba(224, 122, 61, 0.15);
+  box-shadow: 0 0 30px rgba(224, 122, 61, 0.2);
+}
+
+/* Flow Inputs */
+.flow-input {
+  background: var(--charred);
+  border: 2px solid var(--concrete-light);
+  padding: 1rem 1.5rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 1.5rem;
+  color: var(--paper);
+  text-align: center;
+  width: 100%;
+  max-width: 150px;
+  transition: all 0.2s ease;
+}
+
+.flow-input:focus {
+  outline: none;
+  border-color: var(--amber);
+  box-shadow: 4px 4px 0 rgba(224, 122, 61, 0.3);
+}
+
+/* Flow Timer */
+.flow-timer-circle {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+.flow-timer-track {
+  fill: none;
+  stroke: rgba(245, 240, 232, 0.1);
+  stroke-width: 6;
+}
+
+.flow-timer-progress {
+  fill: none;
+  stroke: var(--amber);
+  stroke-width: 6;
+  stroke-linecap: square;
+  transition: stroke-dashoffset 1s linear;
+}
+
+/* Flow Exit Button */
+.flow-exit-btn {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--concrete);
+  border: 2px solid var(--concrete-light);
+  color: var(--stone);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.flow-exit-btn:hover {
+  border-color: var(--amber);
+  color: var(--paper);
+}
+
+/* Flow Animations */
+@keyframes flow-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+@keyframes flow-text-enter {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flow-text-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes flow-particle-rise {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.5) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flow-timer-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px var(--flow-timer-glow));
+  }
+  50% {
+    filter: drop-shadow(0 0 30px var(--flow-timer-glow));
+  }
+}
+
 .flow-breathe {
   animation: flow-breathe 4s ease-in-out infinite;
 }
@@ -753,148 +941,7 @@ select:focus {
   animation: flow-timer-glow 2s ease-in-out infinite;
 }
 
-.flow-countdown {
-  animation: flow-countdown-pulse 800ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-/* Flow button styles */
-.flow-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 1rem 2.5rem;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 9999px;
-  color: var(--flow-text-primary);
-  font-family: var(--font-flow-display), Georgia, serif;
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  min-height: 56px;
-  min-width: 200px;
-}
-
-.flow-btn-primary:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: scale(1.02);
-}
-
-.flow-btn-primary:active {
-  transform: scale(0.98);
-}
-
-.flow-btn-dark {
-  background: rgba(60, 36, 21, 0.8);
-  border-color: rgba(60, 36, 21, 0.9);
-  color: #faf6f0;
-}
-
-.flow-btn-dark:hover {
-  background: rgba(60, 36, 21, 0.95);
-  border-color: rgba(60, 36, 21, 1);
-}
-
-/* Flow card styles (for selection) */
-.flow-card {
-  position: relative;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 1rem;
-  cursor: pointer;
-  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 280px;
-  text-align: left;
-}
-
-.flow-card:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-2px);
-}
-
-.flow-card.selected {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.6);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-}
-
-.flow-card-dark {
-  background: rgba(60, 36, 21, 0.6);
-  border-color: rgba(60, 36, 21, 0.8);
-}
-
-.flow-card-dark:hover {
-  background: rgba(60, 36, 21, 0.75);
-  border-color: rgba(60, 36, 21, 0.9);
-}
-
-.flow-card-dark.selected {
-  background: rgba(60, 36, 21, 0.85);
-  border-color: var(--terracotta);
-}
-
-/* Flow input styles */
-.flow-input {
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.75rem;
-  padding: 1rem 1.5rem;
-  font-family: var(--font-flow-mono), monospace;
-  font-size: 1.5rem;
-  color: var(--flow-text-primary);
-  text-align: center;
-  width: 100%;
-  max-width: 150px;
-  transition: all 300ms ease;
-}
-
-.flow-input:focus {
-  outline: none;
-  border-color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-.flow-input-dark {
-  background: rgba(60, 36, 21, 0.3);
-  border-color: rgba(60, 36, 21, 0.5);
-  color: var(--flow-text-dark-primary);
-}
-
-.flow-input-dark:focus {
-  border-color: var(--terracotta);
-  background: rgba(60, 36, 21, 0.4);
-}
-
-/* Circular timer SVG styling */
-.flow-timer-circle {
-  transform: rotate(-90deg);
-  transform-origin: center;
-}
-
-.flow-timer-track {
-  fill: none;
-  stroke: var(--flow-timer-track);
-  stroke-width: 8;
-}
-
-.flow-timer-progress {
-  fill: none;
-  stroke: var(--flow-timer-progress);
-  stroke-width: 8;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 1s linear;
-}
-
-/* Particle container */
+/* Flow Particles */
 .flow-particles {
   position: fixed;
   inset: 0;
@@ -906,70 +953,143 @@ select:focus {
 .flow-particle {
   position: absolute;
   bottom: -20px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--amber);
   animation: flow-particle-rise 3s ease-out forwards;
 }
 
-/* Exit/close button */
-.flow-exit-btn {
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  color: var(--flow-text-secondary);
-  cursor: pointer;
-  transition: all 300ms ease;
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
 }
 
-.flow-exit-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--flow-text-primary);
+::-webkit-scrollbar-track {
+  background: var(--charred);
 }
 
-/* Responsive touch targets */
-@media (max-width: 640px) {
+::-webkit-scrollbar-thumb {
+  background: var(--concrete-light);
+  border: 2px solid var(--charred);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--amber);
+}
+
+/* ========================================
+   INPUT FOCUS STATES
+   ======================================== */
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--amber) !important;
+  box-shadow: 4px 4px 0 rgba(224, 122, 61, 0.3) !important;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+  .header-inner {
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-brutalist {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .nav-brutalist-text {
+    font-size: 0.75rem;
+  }
+
+  .nav-brutalist-jp {
+    display: none;
+  }
+
+  .btn-brutalist {
+    padding: 0.625rem 1rem;
+  }
+
+  .main-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .brutalist-card {
+    padding: 1rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+
   .flow-btn-primary {
-    min-height: 60px;
     min-width: 100%;
-    padding: 1.25rem 2rem;
+    padding: 1rem 2rem;
   }
 
   .flow-card {
     min-width: 100%;
-    padding: 1.25rem;
   }
 
   .flow-exit-btn {
     top: 1rem;
     right: 1rem;
+    width: 40px;
+    height: 40px;
   }
 }
 
-/* Reduced motion support */
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+
 @media (prefers-reduced-motion: reduce) {
   .flow-breathe,
-  .flow-timer-glow {
+  .flow-timer-glow,
+  .animate-pulse-glow {
     animation: none;
   }
 
   .flow-enter,
-  .flow-exit,
-  .flow-gradient-enter {
+  .flow-exit {
     animation-duration: 0.01ms;
   }
 
-  .flow-gradient {
+  .stagger-children > * {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms;
+  }
+
+  .brutalist-card,
+  .btn-brutalist,
+  .flow-card,
+  .flow-btn-primary {
     transition-duration: 0.01ms;
   }
 }
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.text-amber { color: var(--amber); }
+.text-crema { color: var(--crema); }
+.text-paper { color: var(--paper); }
+.text-stone { color: var(--stone); }
+.text-charred { color: var(--charred); }
+
+.bg-amber { background-color: var(--amber); }
+.bg-concrete { background-color: var(--concrete); }
+.bg-charred { background-color: var(--charred); }
+
+.border-amber { border-color: var(--amber); }
+.border-concrete { border-color: var(--concrete-light); }

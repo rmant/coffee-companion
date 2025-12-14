@@ -18,59 +18,48 @@ export default async function CoffeesPage({
     .eq("status", status)
     .order("created_at", { ascending: false });
 
-  const statusConfig: Record<CoffeeStatus, { label: string; color: string; stampText: string }> = {
-    active: { label: "Activos", color: "#5c6b4a", stampText: "en rotación" },
-    finished: { label: "Terminados", color: "#6b4423", stampText: "agotado" },
-    wishlist: { label: "Lista de Deseos", color: "#c45c3e", stampText: "por probar" },
+  const statusConfig: Record<CoffeeStatus, { label: string; color: string }> = {
+    active: { label: "ACTIVOS", color: "var(--amber)" },
+    finished: { label: "TERMINADOS", color: "var(--crema)" },
+    wishlist: { label: "DESEOS", color: "var(--stone)" },
   };
 
   return (
     <div className="space-y-8">
-      {/* Encabezado */}
-      <section className="flex items-end justify-between">
-        <div>
-          <h1
-            className="text-4xl font-bold text-[#3c2415] tracking-tight"
-            style={{ fontFamily: "var(--font-display), Georgia, serif" }}
-          >
-            Colección de Cafés
-          </h1>
-          <p className="text-muted-foreground mt-1 text-lg">
-            Tus granos, curados con cariño
-          </p>
+      {/* Header */}
+      <section className="section-header">
+        <div className="flex-1">
+          <h1 className="section-title">COLECCIÓN DE CAFÉS</h1>
+          <p className="section-subtitle mt-1">Tus granos, curados con cariño</p>
         </div>
-        <Link
-          href="/coffees/new"
-          className="btn-vintage text-sm"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-          Agregar Café
+        <Link href="/coffees/new" className="btn-brutalist">
+          <span className="btn-brutalist-plus">+</span>
+          <span className="hidden md:inline">AGREGAR</span>
         </Link>
       </section>
 
-      {/* Pestañas */}
-      <div className="flex gap-2 border-b border-border/60 pb-0">
+      {/* Tabs - Brutalist style */}
+      <div className="flex gap-1 border-b-2 border-concrete-light">
         {(["active", "finished", "wishlist"] as CoffeeStatus[]).map((s) => {
           const isActive = s === status;
+          const config = statusConfig[s];
           return (
             <Link
               key={s}
               href={`/coffees?status=${s}`}
               className={`
-                relative px-4 py-3 text-sm font-medium transition-colors
+                relative px-6 py-4 font-display text-sm tracking-wider transition-all
                 ${isActive
-                  ? "text-[#3c2415]"
-                  : "text-muted-foreground hover:text-[#3c2415]"
+                  ? "bg-concrete text-paper"
+                  : "text-stone hover:text-paper hover:bg-concrete/50"
                 }
               `}
             >
-              {statusConfig[s].label}
+              {config.label}
               {isActive && (
                 <span
-                  className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full"
-                  style={{ backgroundColor: statusConfig[s].color }}
+                  className="absolute bottom-0 left-0 right-0 h-[3px]"
+                  style={{ backgroundColor: config.color }}
                 />
               )}
             </Link>
@@ -78,71 +67,58 @@ export default async function CoffeesPage({
         })}
       </div>
 
-      {/* Cuadrícula de Cafés */}
+      {/* Coffee Grid */}
       {coffees && coffees.length > 0 ? (
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 stagger-children">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 stagger-children">
           {coffees.map((coffee) => {
             const coffeeWithDays = withDaysOffRoast(coffee);
-            const config = statusConfig[status];
 
             return (
               <Link key={coffee.id} href={`/coffees/${coffee.id}`}>
-                <article className="journal-card p-5 h-full group">
-                  {/* Encabezado con nombre y sello */}
-                  <div className="flex items-start justify-between gap-3 mb-3">
+                <article className="brutalist-card group h-full">
+                  {/* Header with name and days */}
+                  <div className="flex items-start justify-between gap-3 mb-4">
                     <div className="min-w-0 flex-1">
-                      <h3
-                        className="font-semibold text-lg text-[#3c2415] group-hover:text-[#c45c3e] transition-colors truncate"
-                        style={{ fontFamily: "var(--font-display), Georgia, serif" }}
-                      >
-                        {coffee.name}
+                      <h3 className="font-display text-2xl text-paper group-hover:text-amber transition-colors truncate">
+                        {coffee.name.toUpperCase()}
                       </h3>
-                      <p className="text-sm text-muted-foreground truncate">
+                      <p className="font-body text-sm text-stone truncate italic">
                         {coffee.roaster}
                       </p>
                     </div>
                     {coffeeWithDays.days_off_roast !== null && (
-                      <div
-                        className="stamp text-[10px] px-2 py-1 flex-shrink-0"
-                        style={{ color: config.color }}
-                      >
-                        {coffeeWithDays.days_off_roast}d
+                      <div className="brutalist-badge flex-shrink-0">
+                        {coffeeWithDays.days_off_roast}D
                       </div>
                     )}
                   </div>
 
-                  {/* Origen */}
+                  {/* Origin */}
                   {coffee.origin && (
-                    <p className="text-sm text-[#5c6b4a] mb-3 flex items-center gap-1.5">
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="opacity-60">
-                        <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
-                        <path d="M2 7h10M7 2a10 10 0 000 10M7 2a10 10 0 010 10" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-                      </svg>
+                    <div className="flex items-center gap-2 mb-4 font-mono text-xs text-stone uppercase tracking-wider">
+                      <span className="text-amber">//</span>
                       {coffee.origin}
-                    </p>
+                    </div>
                   )}
 
-                  {/* Etiquetas de proceso y tueste */}
-                  <div className="flex flex-wrap gap-2 mb-3">
+                  {/* Process & Roast tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {coffee.process && (
-                      <span className="indie-tag">
+                      <span className="brutalist-tag text-xs">
                         {coffee.process}
                       </span>
                     )}
                     {coffee.roast_level && (
-                      <span className="indie-tag">
+                      <span className="brutalist-tag text-xs">
                         {coffee.roast_level}
                       </span>
                     )}
                   </div>
 
-                  {/* Notas de sabor */}
+                  {/* Flavor notes */}
                   {coffee.flavor_notes && coffee.flavor_notes.length > 0 && (
-                    <div className="pt-3 border-t border-border/40">
-                      <p
-                        className="text-sm text-[#c45c3e]"
-                        style={{ fontFamily: "var(--font-hand), cursive" }}
-                      >
+                    <div className="pt-4 border-t border-concrete-light">
+                      <p className="font-body text-sm text-amber italic">
                         {coffee.flavor_notes.join(" · ")}
                       </p>
                     </div>
@@ -153,41 +129,26 @@ export default async function CoffeesPage({
           })}
         </div>
       ) : (
-        <div className="journal-card p-12 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#f0ebe3] mb-6">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className="text-[#6b4423]">
-              <ellipse cx="20" cy="20" rx="10" ry="15" stroke="currentColor" strokeWidth="2" />
-              <path
-                d="M20 8c-2 4-2 10 0 12s2 10 0 12"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
+        /* Empty state */
+        <div className="brutalist-card p-16 text-center">
+          <div className="inline-flex items-center justify-center w-24 h-24 bg-charred border-2 border-concrete-light mb-8">
+            <span className="font-display text-5xl text-amber opacity-30">C</span>
           </div>
-          <p className="text-lg text-muted-foreground mb-2">
-            Sin cafés {statusConfig[status].label.toLowerCase()}
+          <p className="font-display text-2xl text-paper mb-2">
+            SIN CAFÉS {statusConfig[status].label}
           </p>
-          <p
-            className="text-[#c45c3e] mb-6"
-            style={{ fontFamily: "var(--font-hand), cursive" }}
-          >
+          <p className="font-body text-stone italic mb-8">
             {status === "active"
-              ? "¡es hora de agregar algunos granos!"
+              ? "¡Es hora de agregar algunos granos!"
               : status === "wishlist"
-                ? "¿qué te gustaría probar?"
-                : "¡prepara más para terminar más!"
+                ? "¿Qué te gustaría probar?"
+                : "¡Prepara más para terminar más!"
             }
           </p>
           {status !== "finished" && (
-            <Link
-              href="/coffees/new"
-              className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-dashed border-[#c45c3e] text-[#c45c3e] rounded-lg hover:bg-[#c45c3e] hover:text-white transition-all"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-              Agregar tu primer café
+            <Link href="/coffees/new" className="btn-brutalist">
+              <span className="btn-brutalist-plus">+</span>
+              AGREGAR PRIMER CAFÉ
             </Link>
           )}
         </div>

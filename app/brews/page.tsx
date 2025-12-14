@@ -2,27 +2,18 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { withRatio, formatBrewTime } from "@/lib/utils/brew-calculations";
 
-// Componente de calificación con granos de café
-function CoffeeBeanRating({ rating }: { rating: number }) {
+// Brutalist rating display
+function BrutalistRating({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-0.5">
+    <div className="flex items-center gap-1">
       {[1, 2, 3, 4, 5].map((bean) => (
-        <svg
+        <div
           key={bean}
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          className={bean <= rating ? "text-[#6b4423]" : "text-[#e8e0d5]"}
-        >
-          <ellipse cx="12" cy="12" rx="6" ry="10" fill="currentColor" />
-          <path
-            d="M12 4c-1 2-1 6 0 8s1 6 0 8"
-            stroke={bean <= rating ? "#3c2415" : "#d4cdc4"}
-            strokeWidth="1.5"
-            fill="none"
-            strokeLinecap="round"
-          />
-        </svg>
+          className={`w-3 h-3 ${
+            bean <= rating ? "bg-amber" : "bg-concrete-light"
+          }`}
+          style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+        />
       ))}
     </div>
   );
@@ -37,7 +28,7 @@ export default async function BrewsPage() {
     .order("brewed_at", { ascending: false })
     .limit(50);
 
-  // Agrupar preparaciones por fecha
+  // Group brews by date
   type BrewWithRelations = NonNullable<typeof brews>[number];
   const brewsByDate = brews?.reduce<Record<string, BrewWithRelations[]>>((acc, brew) => {
     const date = new Date(brew.brewed_at).toLocaleDateString("es-ES", {
@@ -53,46 +44,33 @@ export default async function BrewsPage() {
 
   return (
     <div className="space-y-8">
-      {/* Encabezado */}
-      <section className="flex items-end justify-between">
-        <div>
-          <h1
-            className="text-4xl font-bold text-[#3c2415] tracking-tight"
-            style={{ fontFamily: "var(--font-display), Georgia, serif" }}
-          >
-            Historial de Preparaciones
-          </h1>
-          <p className="text-muted-foreground mt-1 text-lg">
-            Tu viaje cafetero, documentado
-          </p>
+      {/* Header */}
+      <section className="section-header">
+        <div className="flex-1">
+          <h1 className="section-title">HISTORIAL</h1>
+          <p className="section-subtitle mt-1">Tu viaje cafetero, documentado</p>
         </div>
-        <Link
-          href="/brews/new"
-          className="btn-vintage text-sm"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-          Registrar
+        <Link href="/brews/new" className="btn-brutalist">
+          <span className="btn-brutalist-plus">+</span>
+          <span className="hidden md:inline">REGISTRAR</span>
         </Link>
       </section>
 
-      {/* Lista de Preparaciones */}
+      {/* Brews List */}
       {brews && brews.length > 0 ? (
-        <div className="space-y-8">
+        <div className="space-y-10">
           {Object.entries(brewsByDate || {}).map(([date, dateBrews]) => (
             <section key={date}>
-              {/* Encabezado de Fecha */}
-              <div className="flex items-center gap-4 mb-4">
-                <h2
-                  className="text-sm font-medium text-muted-foreground uppercase tracking-wider whitespace-nowrap"
-                >
+              {/* Date Header */}
+              <div className="flex items-center gap-4 mb-6">
+                <h2 className="font-mono text-xs text-stone uppercase tracking-[0.2em] whitespace-nowrap">
                   {date}
                 </h2>
-                <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
+                <div className="flex-1 h-px bg-concrete-light" />
+                <span className="font-mono text-xs text-amber">{dateBrews.length}</span>
               </div>
 
-              {/* Preparaciones de esta fecha */}
+              {/* Brews for this date */}
               <div className="space-y-4 stagger-children">
                 {dateBrews?.map((brew) => {
                   const brewWithRatio = withRatio(brew);
@@ -105,78 +83,74 @@ export default async function BrewsPage() {
 
                   return (
                     <Link key={brew.id} href={`/brews/${brew.id}`}>
-                      <article className="journal-card p-5 group">
-                        <div className="flex items-start justify-between gap-4">
-                          {/* Lado izquierdo - Info del café */}
+                      <article className="brutalist-card group">
+                        <div className="flex items-start justify-between gap-6">
+                          {/* Left side - Coffee info */}
                           <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-3 mb-1">
-                              <h3
-                                className="font-semibold text-lg text-[#3c2415] group-hover:text-[#c45c3e] transition-colors truncate"
-                                style={{ fontFamily: "var(--font-display), Georgia, serif" }}
-                              >
-                                {coffee?.name || "Café Desconocido"}
+                            <div className="flex items-center gap-4 mb-2">
+                              <h3 className="font-display text-2xl text-paper group-hover:text-amber transition-colors truncate">
+                                {(coffee?.name || "CAFÉ DESCONOCIDO").toUpperCase()}
                               </h3>
                               {brew.rating && (
-                                <CoffeeBeanRating rating={brew.rating} />
+                                <BrutalistRating rating={brew.rating} />
                               )}
                             </div>
-                            <p className="text-sm text-muted-foreground">
-                              {coffee?.roaster}
+                            <div className="flex items-center gap-3 font-mono text-xs text-stone">
+                              <span>{coffee?.roaster || "—"}</span>
                               {brewer && (
-                                <span className="text-[#5c6b4a]"> · {brewer.name}</span>
+                                <>
+                                  <span className="text-amber">/</span>
+                                  <span className="text-paper/60">{brewer.name}</span>
+                                </>
                               )}
-                            </p>
+                            </div>
                           </div>
 
-                          {/* Lado derecho - Parámetros */}
+                          {/* Right side - Parameters */}
                           <div className="text-right flex-shrink-0">
-                            <div className="flex items-center gap-2 justify-end mb-1">
-                              <span className="font-mono text-sm bg-[#f0ebe3] px-2 py-1 rounded text-[#3c2415]">
+                            <div className="flex items-center gap-3 mb-2">
+                              <span className="font-mono text-sm bg-charred px-3 py-1.5 border border-concrete-light text-paper">
                                 {brew.dose_g}g : {brew.water_g}g
                               </span>
                               {brewWithRatio.ratio && (
-                                <span className="stamp text-[10px] px-2 py-0.5 text-[#5c6b4a]">
+                                <span className="brutalist-badge">
                                   {brewWithRatio.ratio}
                                 </span>
                               )}
                             </div>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="font-mono text-[10px] text-stone uppercase tracking-wider">
                               {formatBrewTime(brew.total_time_s)} · {brewTime}
                             </p>
                           </div>
                         </div>
 
-                        {/* Notas de cata y comentarios */}
+                        {/* Tasting notes and feedback */}
                         {(brew.tasting_notes?.length > 0 || brew.feedback) && (
-                          <div className="mt-4 pt-4 border-t border-border/40">
+                          <div className="mt-5 pt-5 border-t border-concrete-light">
                             {brew.tasting_notes && brew.tasting_notes.length > 0 && (
-                              <div className="flex flex-wrap gap-1.5 mb-2">
+                              <div className="flex flex-wrap gap-2 mb-3">
                                 {brew.tasting_notes.map((note: string, i: number) => (
-                                  <span key={i} className="indie-tag text-xs">
+                                  <span key={i} className="brutalist-tag text-xs">
                                     {note}
                                   </span>
                                 ))}
                               </div>
                             )}
                             {brew.feedback && (
-                              <p
-                                className="text-sm text-[#c45c3e] line-clamp-2"
-                                style={{ fontFamily: "var(--font-hand), cursive" }}
-                              >
+                              <p className="font-body text-sm text-amber italic">
                                 "{brew.feedback}"
                               </p>
                             )}
                           </div>
                         )}
 
-                        {/* Objetivo si está definido */}
+                        {/* Goal if defined */}
                         {brew.goal && (
-                          <div className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="opacity-60">
-                              <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1.5" />
-                              <circle cx="6" cy="6" r="2" fill="currentColor" />
-                            </svg>
-                            Objetivo: {brew.goal}
+                          <div className="mt-4 flex items-center gap-3">
+                            <span className="w-2 h-2 bg-crema" />
+                            <span className="font-mono text-xs text-stone uppercase tracking-wider">
+                              Objetivo: {brew.goal}
+                            </span>
                           </div>
                         )}
                       </article>
@@ -188,49 +162,30 @@ export default async function BrewsPage() {
           ))}
         </div>
       ) : (
-        <div className="journal-card p-12 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#f0ebe3] mb-6">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className="text-[#6b4423]">
-              <path
-                d="M8 12h20v18a5 5 0 01-5 5H13a5 5 0 01-5-5V12z"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-              <path d="M28 15h3a4 4 0 010 8h-3" stroke="currentColor" strokeWidth="2" />
-              <path
-                d="M13 6c0-1.5 1-3 3-3s3 1.5 3 3M18 6c0-1.5 1-3 3-3s3 1.5 3 3"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                opacity="0.4"
-              />
-            </svg>
+        /* Empty state */
+        <div className="brutalist-card p-16 text-center">
+          <div className="inline-flex items-center justify-center w-24 h-24 bg-charred border-2 border-concrete-light mb-8">
+            <span className="font-display text-5xl text-amber opacity-30">B</span>
           </div>
-          <p className="text-lg text-muted-foreground mb-2">
-            Sin preparaciones registradas
+          <p className="font-display text-2xl text-paper mb-2">
+            SIN PREPARACIONES
           </p>
-          <p
-            className="text-[#c45c3e] mb-6"
-            style={{ fontFamily: "var(--font-hand), cursive" }}
-          >
-            tu primera taza espera ser documentada
+          <p className="font-body text-stone italic mb-8">
+            Tu primera taza espera ser documentada
           </p>
-          <Link
-            href="/brews/new"
-            className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-dashed border-[#c45c3e] text-[#c45c3e] rounded-lg hover:bg-[#c45c3e] hover:text-white transition-all"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            Registrar tu primera preparación
+          <Link href="/brews/new" className="btn-brutalist">
+            <span className="btn-brutalist-plus">+</span>
+            PRIMERA PREPARACIÓN
           </Link>
         </div>
       )}
 
-      {/* Pie decorativo */}
+      {/* Footer */}
       {brews && brews.length > 0 && (
-        <div className="divider-coffee text-xs uppercase tracking-widest">
-          {brews.length} preparaciones documentadas
+        <div className="divider-brutalist">
+          <span className="divider-brutalist-text">
+            {brews.length} preparaciones documentadas
+          </span>
         </div>
       )}
     </div>
